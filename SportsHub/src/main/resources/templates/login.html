@@ -1,0 +1,269 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<head>
+<title>Login</title>
+</head>
+<body>
+	<style>
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.loginmain {
+	padding: 1px 0;
+	height: 100%;
+	width: 100%;
+	background-image: url("/images/nba_white.jpg");
+	background-size: cover;
+	color: #fff;
+	font-family: "Comfortaa", "Helvetica", sans-serif;
+}
+
+.login {
+	max-width: 280px;
+	min-height: 500px;
+	margin: 30px auto;
+	background-color: rgba(10, 10, 10, .68);
+}
+
+.login-form {
+	padding: 8px 20px 20px;
+	height: 120px;
+	width: 100%;
+	/*background-color: green;*/
+}
+
+.username-row {
+	position: relative;
+	height: 40px;
+	/*background-color: pink;*/
+	border-bottom: 1px solid;
+	margin-bottom: 10px;
+}
+
+.password-row {
+	position: relative;
+	height: 40px;
+	/* background-color: grey;*/
+	border-bottom: 1px solid;
+}
+
+.call-to-action {
+	margin: 22px 0;
+	height: 130px;
+	width: 100%;
+	/*background-color: blue;*/
+}
+
+.login-button {
+	display: block;
+	width: 240px;
+	height: 40px;
+	padding: 0;
+	margin: 10px 20px 10px;
+	font-weight: 700;
+	color: #fff;
+	background-color: #22c08a;
+	border: none;
+	border-radius: 20px;
+	transition: background-color .10s ease-in-out;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.login-button:hover {
+	background-color: #26d69a;
+}
+
+.login-button:active {
+	background-color: #1eaa7a;
+}
+
+.signupref {
+	display: inline-block;
+	width: 200px;
+	margin: 0 40px;
+	font-size: .8rem;
+	color: rgba(255, 255, 255, .4); /
+	*background-color: yellow;
+}
+
+.signupref .fordetails {
+	color: #fff;
+}
+
+.hdr1 {
+	font-size: 20px;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	display: block;
+	font-family: 'Fjalla One', sans-serif;
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	margin-top: 5px;
+}
+</style>
+
+	<div class="container loginmain">
+
+
+
+		<form id="signup-Form" th:action="@{~/login}" method="post">
+
+			<div id="login" class="login">
+				<h3 class="hdr1">SportsHub</h3>
+
+				<div class="login-form">
+					<div class="row username-row ">
+						<label for="username_input"></label> <input type="text"
+							id="userID" name="userID" class="username-input" value=""
+							placeholder="UserID"></input>
+					</div>
+					<div class="row password-row ">
+						<label for="password_input"> </label><input type="text"
+							id="username" name="username" class="password-input"
+							placeholder="UserName"></input>
+					</div>
+				</div>
+
+				<div class="call-to-action">
+					<button id="login-button" class="login-button" type="button"
+						onclick="submitForm();">Log In</button>
+
+					<!-- 
+					<p class="signupref">
+						Don't have an account? <a href="/signup" class="fordetails">Sign Up</a>
+
+					</p> -->
+
+
+
+				</div>
+				<fb:login-button auto_logout_link="true" size="large"
+					scope="public_profile,email" onlogin="checkLoginState();">
+				</fb:login-button>
+				<p th:text="${blockstatus}" />
+			</div>
+		</form>
+
+		<div id="status"></div>
+
+		<script type="text/javascript">
+			
+		</script>
+
+
+	</div>
+	<script>
+		// This is called with the results from from FB.getLoginStatus().
+		function statusChangeCallback(response) {
+			// The response object is returned with a status field that lets the
+			// app know the current login status of the person.
+			// Full docs on the response object can be found in the documentation
+			// for FB.getLoginStatus().
+			if (response.status === 'connected') {
+				// Logged into your app and Facebook.
+				checkAccountStatus();
+			} else if (response.status === 'not_authorized') {
+				// The person is logged into Facebook, but not your app.
+				document.getElementById('status').innerHTML = 'Login with Facebook ';
+			} else {
+				// The person is not logged into Facebook, so we're not sure if
+				// they are logged into this app or not.
+				document.getElementById('status').innerHTML = 'Login with Facebook ';
+			}
+		}
+		// This function is called when someone finishes with the Login
+		// Button.  See the onlogin handler attached to it in the sample
+		// code below.
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+
+		function logout() {
+			FB.logout(function(response) {
+				// user is now logged out
+
+			});
+		}
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '258681938164649',
+				cookie : true, // enable cookies to allow the server to access 
+				// the session
+				xfbml : true, // parse social plugins on this page
+				version : 'v3.2' // use version 2.2
+			});
+			// Now that we've initialized the JavaScript SDK, we call 
+			// FB.getLoginStatus().  This function gets the state of the
+			// person visiting this page and can return one of three states to
+			// the callback you provide.  They can be:
+			//
+			// 1. Logged into your app ('connected')
+			// 2. Logged into Facebook, but not your app ('not_authorized')
+			// 3. Not logged into Facebook and can't tell if they are logged into
+			//    your app or not.
+			//
+			// These three cases are handled in the callback function.
+
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		};
+		// Load the SDK asynchronously
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		// Here we run a very simple test of the Graph API after login is
+		// successful.  See statusChangeCallback() for when this call is made.
+		function checkAccountStatus() {
+			FB.api('/me?fields=id,name,first_name,last_name,email', function(
+					response) {
+				/* $('#id').val(response.id);
+				$('#name').val(response.name);
+					$('login-Form').submit();
+				console.log("dddddddddddddddd"+response.id);
+				 */
+				console.log(response);
+				/* 	$.ajax({
+						type : "POST",
+						url : "/login",
+						data : "&user_name=" + response.name + "&user_first_name="
+								+ response.first_name + "&user_last_name="
+								+ response.last_name + "&user_email="
+								+ response.email + "&user_id=" + response.id,
+					}); */
+
+				$("#userID").val(response.id);
+				$("#username").val(response.name);
+				logout();
+
+			});
+		}
+
+		window.addEventListener("onbeforeunload", logout());
+
+		function submitForm() {
+			document.getElementById("signup-Form").submit();
+		}
+	</script>
+
+
+</body>
+</html>

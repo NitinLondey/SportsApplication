@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Team Info</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+	<style>
+.header1 {
+	color: black;
+	font-size: 20px;
+	/* background-color: #d1242a; */
+	padding-top: 5px;
+	padding-bottom: 2px;
+	display: block;
+	font-family: 'Fjalla One', sans-serif;
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	margin-top: 5px;
+}
+</style>
+	<div class="container-fluid">
+
+
+
+		<div th:replace="navigation :: navigation"></div>
+
+
+		<div class="card mt-2 " th:if="${session.userID!=null}">
+			<div class="card-header">Favorite Team</div>
+			<div class="card-body m-0 p-0 ">
+
+				<table class="table table-bordered text-center">
+					<tr>
+						<th>Team Name</th>
+						<th>Abbreviation</th>
+					</tr>
+					<tr th:each="listofdata : ${data}">
+						<td th:text="${listofdata.teamName}"></td>
+						<td th:text="${listofdata.abbreviation}"></td>
+
+					</tr>
+
+				</table>
+			</div>
+
+		</div>
+
+
+
+	<!-- 	<div class="card mt-2" th:if="${session.userID!=null}">
+			<div class="card-header">Scores for Today's Match</div>
+			<div class="card-body m-0 p-0 ">
+
+
+				<table class="table table-bordered text-center">
+					<thead>
+						<tr>
+							<th scope="col">Home team</th>
+							<th scope="col">Home Score</th>
+
+							<th scope="col">Away team</th>
+							<th scope="col">Away Score</th>
+
+						</tr>
+					</thead>
+					<tr th:each="scoreDetail,iterStat : ${scoreDetails}">
+						<td th:text="${scoreDetail.get('homeTeam') }"></td>
+
+						<td th:text="${scoreDetail.get('homeScore')}"></td>
+
+						<td th:text="${scoreDetail.get('awayTeam')}" />
+
+						<td th:text="${scoreDetail.get('awayScore')}"></td>
+					</tr>
+				</table>
+			</div>
+		</div> -->
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

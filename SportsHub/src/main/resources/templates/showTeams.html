@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+	rel="stylesheet" />
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
+<body>
+
+
+
+
+
+	<div th:replace="navigation :: navigation"></div>
+	<div class="container-fluid">
+
+
+		<!-- 		<div class="alert alert-success" th:if="${winNotifications != null}">
+			<strong>Won</strong> <span
+				th:each="winNotifications : ${winNotifications}"
+				th:text="${winNotifications + ' '+ 'won a  match'} "> </span>
+		</div>
+
+		<div class="alert alert-danger" th:if="${lossNotifications != null}">
+			<strong>Lost</strong> <span
+				th:each="lossNotifications : ${lossNotifications}"
+				th:text="${lossNotifications + ' '+ 'lost a match' } "> 
+				</br>
+				 </span>
+		</div> -->
+
+
+		<!-- 
+		<span th:if="${winNotifications != null}"> <span
+			th:each="winNotifications : ${winNotifications}"
+			th:text="${winNotifications + ' '+ 'won a  match'} "> </span>
+
+		</span> <br /> <br /> <span th:if="${lossNotifications != null}"> <span
+			th:each="lossNotifications : ${lossNotifications}"
+			th:text="${lossNotifications + ' '+ 'lost a match'} "> loss a
+				new match </span>
+
+		</span> -->
+
+		<div class="card mt-2 ">
+			<div class="card-header">Teams</div>
+			<div class="card-body m-0 p-0">
+
+				<table class="table table-bordered text-center">
+					<thead>
+						<tr>
+							<th scope="col">Abb</th>
+							<th scope="col">Name</th>
+							<th scope="col">City</th>
+						</tr>
+					</thead>
+					<tr th:each="teamStandingEntry,iterStat : ${teamStandingEntries}">
+						<td th:text="${teamStandingEntry.team.Abbreviation}"
+							th:id="${teamStandingEntry.team.ID}">
+						<td><a th:href="@{~/team?id=} + ${teamStandingEntry.team.ID}"
+							th:text="${teamStandingEntry.team.Name}"></a></td>
+						<td th:text="${teamStandingEntry.team.Name}">
+					</tr>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

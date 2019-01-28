@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+	rel="stylesheet" />
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
+<body>
+
+
+	<div class="container-fluid">
+		<div th:replace="navigation :: navigation"></div>
+
+		<div class="card mt-2 ">
+			<div class="card-header">Users</div>
+			<div class="card-body m-0 p-0 ">
+
+				<table class="table table-bordered text-center">
+					<thead>
+						<tr>
+							<th scope="col">User Name</th>
+							<th scope="col">Action</th>
+
+						</tr>
+					</thead>
+					<!-- 	<tr th:each="userEntry : ${listofusers}">
+				
+				<td th:text="${userEntry.user_name}"/>
+							<td >
+			
+				
+			</tr>
+		 -->
+
+
+
+
+
+
+
+
+
+
+					<tr th:each="userEntry : ${listofusers}">
+						<td th:text="${userEntry.user_name}" />
+						<td>
+
+
+							<form th:action="@{/block}" method="post">
+
+								<input type="hidden" th:value="${userEntry.user_id}"
+									th:name="user_data" />
+								<button type="submit" class="removebutton" name="action"
+									value="remove">Remove</button>
+							</form>
+						</td>
+					</tr>
+
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
